@@ -17,5 +17,5 @@ $url = preg_replace("^http\:\/\/127.0.0.1:8087\/^", $ipport, $url);
 if($url != $ipport."/cache/") {
 	echo "<img src='".$url."' width='300' height='300' alt='Song-Image'>";
 } else {
-	echo "<img src='http://file1.npage.de/005588/15/bilder/homer02.gif' width='300' height='300' alt='Song-Image'>";
+	echo "<img id = 'img' src='resources/unknownimg.png' alt='No Thumbnail'>";
 }

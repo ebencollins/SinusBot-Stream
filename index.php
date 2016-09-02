@@ -21,11 +21,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 <script type="text/javascript">
 function loadSong() {
 		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				document.getElementById("getSong").innerHTML = "Song: " + xhttp.responseText;
-			}
-		};
 		xhttp.open("GET", "getSong.php", true);
 		xhttp.send();
 	}	
@@ -65,14 +60,13 @@ setInterval(function() {
 //echo $status["currentTrack"]["title"];
 ?>
 <div id="wrapper">
-<h4>Online Stream by Lala Deviluke & Crank015</h4>
-
+<h4 id = 'title'><?=$yourname?></h4>
 	<div id="getImg">Loading...</div>
 	<div id="audio">
-		<audio id="htmlplayer" src="<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" autoplay controls></audio>
+		<audio id="htmlplayer" src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" autoplay controls></audio> 
 	</div>
 	<div id="search">Loading...</div>
-	<div id="getSong">Please Wait...</div>
+	<!-- <div id="getSong">Please Wait...</div> -->
 </div>
 
 </body>

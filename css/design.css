@@ -1,40 +1,46 @@
 body {
-	background: url(https://newevolutiondesigns.com/images/freebies/colorful-background-10.jpg);
 	text-align: center;
+	background-color: #A9B0AF;
 }
 #wrapper {
 	align: center; 
 	position: absolute;
-	background-color: #A9B0AF;
-	width:1080px;
-	margin:0 auto;
-	top: 10px;
-	left: 100px;
-	right: 100px;
+	width:100%;
+	height:100%;
+	margin:0;
 	font-size: 24px;
-	border-radius: 20px;
-	margin-bottom:10px;
 }
 #wrapper h4 {
+	margin-top: 15px;
+	margin-bottom: 15px;
 	color: black;
+	font-size : 28px;
+    padding : 0;
+    line-height : 20px;
 }
-#getSong {
-	align: left; 
-	float: left;
-	background-color: #A9B0AF;
-	width: 300px;
-	position: absolute;
-	clear: both;
-	margin-top:10px;
-	border-radius: 20px;
+
+#img{
+	margin-bottom: 10px;
+	align: center;
+	width: 95%;
+	height: 80%;
 }
+
 #getImg {
 	margin-bottom: 10px;
+	align: center;
 }
 #audio {
 	margin-bottom: 10px;
+	width: 100%;
+	align: center;
 }
-#search {
+#htmlplayer{
+	margin-bottom: 5px;
+	width: 95%;
+	align: center;
+}
+#getSong {
 	align: right; 
 	float: right;
 	width:300px;
@@ -45,6 +51,6 @@ body {
 	width: 300px;
 	position: absolute;
 	clear: both;
-	margin-top:10px;
 	border-radius: 20px;
+	text-decoration: none;
 }
