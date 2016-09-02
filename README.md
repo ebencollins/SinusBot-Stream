@@ -1,9 +1,12 @@
 # SinusBot-Stream
-Sinusbot Webstream
+Sinusbot Webstream, modified from https://github.com/crank015/SinusBot-Stream/
 
-## Install:
-- Go in your folder, where you would to install it
-- run the command "git clone git@github.com:crank015/SinusBot-Stream.git"
+## Changes
+- None yet
+
+## Install
+- Go to the directory where you wish to install (typically your web directory)
+- Run the command "git clone https://github.com/Zahzi/SinusBot-Stream.git"
 - Edit the config.php with your Informations
 
 ## Requirements
