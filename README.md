@@ -2,7 +2,12 @@
 Sinusbot Webstream, modified from https://github.com/crank015/SinusBot-Stream/
 
 ## Changes
-- None yet
+- Very different layout
+- Fixed url not including "http://"
+
+## Planned
+- Support for multiple streams from multiple instances
+- Fetch thumbnails when none found
 
 ## Install
 - Go to the directory where you wish to install (typically your web directory)
