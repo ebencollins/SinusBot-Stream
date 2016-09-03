@@ -3,11 +3,12 @@ error_reporting('E_ERROR');
 
 include("sinusbot.class.php");
 include("config.php");
+session_start();
 
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
 
-$status = $sinusbot->getStatus($inst);
+$status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
 
 $thumbnail = $status["currentTrack"]["thumbnail"];
 

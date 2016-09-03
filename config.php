@@ -1,21 +1,24 @@
 <?php
 
-//IP ADRESSE - PLEASE INSERT YOUR IP NOT LOCALHOST..
-$ip = "000.000.000.000";
-//PORT
-$port = "8087";
-//IP WITH PORT DO NOT EDIT
-$ipport = $ip.":".$port;
+$ip = "000.000.000.000"; //IP Address of the server SinusBot is running on (NOT localhost)
+$port = "8087"; //Port that the web panel is running on (default 8087)
+$user = "webstream"; //username to login to the web panel 
+$passwd = "R3m3mb3rm3"; //corresponding password
 
-//LOGIN USER
-$user = "webstream";
-//LOGIN PASSWORD
-$passwd = "R3m3mb3rm3";
+$title = "SinusBot-Radio"; //title to display
 
 //INSTANCE UUID
-$inst = "0a1fd1db-82e0-4a9a-a4da-cafc70663dd4";
+// $inst = "d8e3ab92-2c9d-4555-814b-76ec0adbbf28";
 
-//YOUR NAME (FOR TITLE)
-$yourname = "SinusBot webstream"
+$instanceIDS = array("UID1","UID2");
+$instanceNames = array("MusicBot #1","MusicBot #2");
+$defaultInstance = 0;
+
+
+
+
+
+//Do NOT modify the following:
+$ipport = $ip.":".$port;
 
 ?>

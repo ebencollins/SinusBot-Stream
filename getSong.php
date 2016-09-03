@@ -2,9 +2,10 @@
 error_reporting('E_ERROR');
 include("sinusbot.class.php");
 include("config.php");
+session_start();
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
-$status = $sinusbot->getStatus($inst);
+$status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
 $track = (($status["currentTrack"]["type"] == "url") ? $status["currentTrack"]["tempTitle"] : $status["currentTrack"]["title"]);
 $artist = $status["currentTrack"]["tempArtist"];
 $name = $track;
