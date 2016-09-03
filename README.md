@@ -3,11 +3,11 @@ Sinusbot Webstream, modified from https://github.com/crank015/SinusBot-Stream/
 
 ## Changes
 - Very different layout
-- Fixed url not including "http://"
+- Uses video.js
 - Support for multiple streams from multiple instances (example.com/SinusBot-Stream/?id=1)
+- Fixed url not including "http://"
 
 ## Planned
-- Better player
 - Fetch thumbnails when none found
 
 ## Install
@@ -21,6 +21,7 @@ Sinusbot Webstream, modified from https://github.com/crank015/SinusBot-Stream/
 - PHP 5
 - Php5-Curl
 - Sinusbot
+- Video.js
 
 ## Sinusbot config.ini Settings
 
