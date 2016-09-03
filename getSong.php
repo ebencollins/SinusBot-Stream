@@ -11,11 +11,6 @@ $artist = $status["currentTrack"]["tempArtist"];
 $name = $track;
 $track = preg_replace('^ ^', '+', $track);
 
-// if(!empty($artist)) {
-// echo $name." from ".$artist;
-// } else {
-// echo $name;
-// }
 function getTrack(){
 	global $track;
 	return $track;

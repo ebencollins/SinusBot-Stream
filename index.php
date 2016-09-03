@@ -31,7 +31,6 @@ if(isset($_GET['id'])){
 }
 
 
-
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
 $sinusbot->selectInstance($inst);
@@ -43,6 +42,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 <link rel="stylesheet" type="text/css" href="css/design.css">
 <title>SinusBot-Radio@<?php echo $title; ?></title>
 
+<script src="//vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -83,18 +83,25 @@ setInterval(function() {
 </head>
 <?php
 
-//$status = $sinusbot->getStatus("0a1fd1db-82e0-4a9a-a4da-cafc70663dd4");
-//echo $status["currentTrack"]["title"];
 ?>
-<div id="wrapper">
-<h4 id = 'title'><?=$title?></h4>
-	<div id="getImg">Loading...</div>
-	<div id="audio">
-		<audio id="htmlplayer" src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" autoplay controls></audio> 
-	</div>
-	<div id="search">Loading...</div>
-	<!-- <div id="getSong">Please Wait...</div> -->
+
+
+<div id = "main">
+  <video id="player" class="video-js vjs-default-skin" controls autoplay preload="auto" poster="resources/unknownimg.png">
+  	<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type='audio/mp3'>
+  </video>
+<div id="search">Loading song name.... </div>
 </div>
+
+<script>
+  'use strict';
+  var player = videojs('player');
+  player.AudioTracks({
+  default: 0,
+  descriptive: 1
+  });
+</script>
+
 
 </body>
 </html>

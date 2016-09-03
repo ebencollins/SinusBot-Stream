@@ -2,55 +2,22 @@ body {
 	text-align: center;
 	background-color: #A9B0AF;
 }
-#wrapper {
-	align: center; 
-	position: absolute;
-	width:94%;
-	height:94%;
-	margin:2%;
-	font-size: 24px;
-}
-#wrapper h4 {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	color: black;
-	font-size : 28px;
-    padding : 0;
-    line-height : 20px;
-}
 
-#img{
-	margin-bottom: 10px;
+#main{
 	align: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+#player{
+	align: center;
+	height: 94%;
 	width: auto;
-	height: 80%;
 }
 
-#getImg {
-	margin-bottom: 10px;
-	align: center;
-}
-#audio {
-	margin-bottom: 10px;
-	width: 100%;
-	align: center;
-}
-#htmlplayer{
-	margin-bottom: 5px;
-	width: 100%;
-	align: center;
-}
-#getSong {
-	align: right; 
-	float: right;
-	width:300px;
-	margin:0 auto;
-	left: 100px;
-	right: 100px;
-	background-color: #A9B0AF;
-	width: 300px;
-	position: absolute;
-	clear: both;
-	border-radius: 20px;
-	text-decoration: none;
+#search{
+	font-size: 2.5vh;
+	height: auto;
+	margin-bottom: 1.5%;
+	margin-top: 0.5%;
 }
