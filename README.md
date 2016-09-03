@@ -4,9 +4,10 @@ Sinusbot Webstream, modified from https://github.com/crank015/SinusBot-Stream/
 ## Changes
 - Very different layout
 - Fixed url not including "http://"
+- Support for multiple streams from multiple instances (example.com/SinusBot-Stream/?id=1)
 
 ## Planned
-- Support for multiple streams from multiple instances
+- Better player
 - Fetch thumbnails when none found
 
 ## Install
