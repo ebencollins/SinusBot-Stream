@@ -1,0 +1,23 @@
+body {
+	text-align: center;
+	background-color: #A9B0AF;
+}
+
+#main{
+	align: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+#player{
+	align: center;
+	height: 94%;
+	width: auto;
+}
+
+#search{
+	font-size: 2.5vh;
+	height: auto;
+	margin-bottom: 1.5%;
+	margin-top: 0.5%;
+}
