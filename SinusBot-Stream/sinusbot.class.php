@@ -34,7 +34,6 @@ class SinusBot {
   public $botUUID = NULL;
   public $instanceUUID = NULL;
 
-
 /**
   * login
   *
