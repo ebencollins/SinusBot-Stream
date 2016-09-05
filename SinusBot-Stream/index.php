@@ -103,7 +103,5 @@ setInterval(function() {
   });
 
 </script>
-
-
 </body>
 </html>
