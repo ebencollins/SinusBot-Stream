@@ -1,10 +1,10 @@
 # SinusBot-Stream
-Sinusbot Webstream, forked from https://github.com/crank015/SinusBot-Stream/
+Sinusbot Webstream, fork based on https://github.com/crank015/SinusBot-Stream/
 
 ## Changes
-- Very different layout
-- Uses video.js
-- Support for multiple streams from multiple instances (example.com/SinusBot-Stream/?id=1)
+- Very different layout using Bootstrap
+- Uses video.js as an audio player
+- Support for multiple streams from multiple instances (example.com/SinusBot-Stream/?id=1, or as a dropdown)
 - Tries to find thumbnail for youtube videos based on metadata
 - Fixed url not including "http://"
 
@@ -14,6 +14,7 @@ Sinusbot Webstream, forked from https://github.com/crank015/SinusBot-Stream/
 - Php5-Curl
 - Sinusbot
 - Video.js
+- Bootstrap
 
 
 ## Install
