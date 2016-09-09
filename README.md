@@ -1,5 +1,5 @@
 # SinusBot-Stream
-Sinusbot Webstream, forked from https://github.com/crank015/SinusBot-Stream/
+Sinusbot Webstream, fork based on https://github.com/crank015/SinusBot-Stream/
 
 ## Changes
 - Very different layout using Bootstrap
