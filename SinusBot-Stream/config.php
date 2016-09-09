@@ -5,17 +5,14 @@ $port = "8087"; //Port that the web panel is running on (default 8087)
 $user = "webstream"; //username to login to the web panel 
 $passwd = "R3m3mb3rm3"; //corresponding password
 
+
+$instanceIDS = array("UID1","UID2"); //array of all musicbot instance UIDs that will be active
+$instanceNames = array("MusicBot #1","MusicBot #2"); //corresponding titles to UIDs
+$defaultInstance = 0; //which instance from the array above should be default?
+
+
 $title = "SinusBot-Radio"; //title to display
-
-//INSTANCE UUID
-// $inst = "d8e3ab92-2c9d-4555-814b-76ec0adbbf28";
-
-$instanceIDS = array("UID1","UID2");
-$instanceNames = array("MusicBot #1","MusicBot #2");
-$defaultInstance = 0;
-
-
-
+$teamspeakJoinLink="ts3server://000.000.000.000?server_uid=SERVERUID"; //(optional) join link for your teamspeak server (opened when teamspeak icon is clicked). If left blank, ts3 icon will not show.
 
 
 //Do NOT modify the following:
