@@ -78,7 +78,7 @@ $token = $sinusbot->getWebStreamToken($inst);
           document.getElementById("songname").innerHTML = xhttp.responseText;
         }
       };
-      xhttp.open("GET", "search.php", true);
+      xhttp.open("GET", "getSongURL.php", true);
       xhttp.send();
     }
 
@@ -142,7 +142,7 @@ $token = $sinusbot->getWebStreamToken($inst);
     <source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type='audio/mp3'>
   </video>
 </div>
-  <div id="songname" align="center"><h4>Loading song name...</h4></div>
+  <div id="songnamediv" align="center"><h5 id="songname">Loading song name...</h5></div>
 </div>
       <script>
         'use strict';

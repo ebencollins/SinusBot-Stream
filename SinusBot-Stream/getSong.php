@@ -7,7 +7,7 @@ $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
 $status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
 $track = (($status["currentTrack"]["type"] == "url") ? $status["currentTrack"]["tempTitle"] : $status["currentTrack"]["title"]);
-$artist = $status["currentTrack"]["tempArtist"];
+$artist = $status["currentTrack"]["artist"];
 $name = $track;
 $track = preg_replace('^ ^', '+', $track);
 
@@ -25,3 +25,4 @@ function getArtist(){
 	global $artist;
 	return $artist;
 }
+
