@@ -19,8 +19,5 @@
 <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
-<link rel="stylesheet" type="text/css" href="css/header.css">
-<style type="text/css">
-</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
