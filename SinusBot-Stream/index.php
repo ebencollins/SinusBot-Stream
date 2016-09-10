@@ -123,7 +123,7 @@ $token = $sinusbot->getWebStreamToken($inst);
           <ul class="dropdown-menu">
             <?php 
               for($i = 0; $i < count($instanceNames); $i++){
-              	if($id == $i){
+              	if($i == array_search($inst, $instanceIDS)){
               		// echo '<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>';
               		echo '<li class="active"><a href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
               	}else{
@@ -139,7 +139,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 </nav>
 <div class="embed-responsive embed-responsive-4by3">
   <video id="player" class="player video-js vjs-default-skin embed-responsive-item" controls autoplay preload="none" poster=<?php echo $imageURL; ?>>
-    <source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type='audio/mp3'>
+    <source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>">
   </video>
 </div>
   <div id="songnamediv" align="center"><h5 id="songname">Loading song name...</h5></div>
