@@ -33,7 +33,6 @@ if(isset($_GET['id'])){
 	}
 }
 
-
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
 $sinusbot->selectInstance($inst);
@@ -109,11 +108,8 @@ $token = $sinusbot->getWebStreamToken($inst);
 					</button>
 					<a class="navbar-brand" href="#"><?php echo $title; ?></a>
 				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
-						<!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
 						<li><a href="https://github.com/Zahzi/SinusBot-Stream" target="_blank"><img src="resources/github.png" class="img-responsive" height="25px" width="22px" alt="Open source on GitHub!"></img></a></li>
 						<?php
 						if($teamspeakJoinLink != ""){
@@ -129,7 +125,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 								<?php 
 								for($i = 0; $i < count($instanceNames); $i++){
 									if($i == array_search($inst, $instanceIDS)){
-              		// echo '<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>';
 										echo '<li class="active"><a href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
 									}else{
 										echo '<li><a href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
@@ -143,9 +138,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 			</div><!-- /.container-fluid -->
 		</nav>
 		<div class="embed-responsive embed-responsive-4by3">
-			<!-- <video id="player" class="player video-js vjs-default-skin embed-responsive-item" controls autoplay preload="none" poster=<?php echo $imageURL; ?>>
-				<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/mp3">
-				</video> -->
 				<video id="player" class="player video-js vjs-default-skin embed-responsive-item"
 				controls preload="none" autoplay
 				poster="resources/unknownimg.png"
