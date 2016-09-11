@@ -9,7 +9,6 @@ include("sinusbot.class.php");
 include("config.php");
 session_start();
 
-$inst = $instanceIDS[$defaultInstance];
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 	if(!is_numeric((int)$id)){
@@ -26,12 +25,15 @@ if(isset($_GET['id'])){
 }else if(isset($_SESSION['inst'])){
 	$inst = $instanceIDS[$_SESSION['inst']];
 	setcookie("inst", $id, time() + (86400*30), "/");
+}else if(isset($_COOKIE['inst'])){
+	$_SESSION['inst'] = $id;
+	$inst = $instanceIDS[$_COOKIE['inst']];
 }else{
-	if(isset($_COOKIE['inst'])){
-		$_SESSION['inst'] = $id;
-		$inst = $instanceIDS[$_COOKIE['inst']];
-	}
+	$inst = $instanceIDS[$defaultInstance];
+	$_SESSION['inst'] = $defaultInstance;
+	setcookie("inst", $defaultInstance, time() + (86400*30), "/");
 }
+
 
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
@@ -106,7 +108,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><?php echo $title; ?></a>
+					<a class="navbar-brand" href="."><?php echo $title; ?></a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
