@@ -11,7 +11,7 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 - Links to join Teamspeak server and login to SinusBot's webpanel on the navigation bar
 
 ## Demo
-- Live demo found [here](http://www.sinusbot.zahzi.us/SinusBot-Stream/)
+- Live demo found [here](http://sinusbot.zahzi.us/SinusBot-Stream/)
 
 ## Dependencies
 - Apache 2 Webserver
