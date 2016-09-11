@@ -1,5 +1,5 @@
 # SinusBot-Stream
-Sinusbot Webstream, fork based on https://github.com/crank015/SinusBot-Stream/
+Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 
 ## Changes
 - Very different layout using Bootstrap
@@ -24,3 +24,8 @@ Sinusbot Webstream, fork based on https://github.com/crank015/SinusBot-Stream/
 - Edit sinusbot's config.ini 
     - EnableWebStream = true
     - SampleInterval = 60
+
+
+## Attributions
+- Using the SinusBot PHP Class from https://github.com/marburger93/SinusBot-API-PHP-Class
+- Origionally based on https://github.com/crank015/SinusBot-Stream/
