@@ -33,4 +33,4 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 
 ## Attributions
 - Uses the SinusBot PHP API Class from [marburger93](https://github.com/marburger93/SinusBot-API-PHP-Class)
-- Originally forked from [crank015's SinusBot-Stream](https://github.com/crank015/SinusBot-Stream/)
+- Originally based on [crank015's SinusBot-Stream](https://github.com/crank015/SinusBot-Stream/)
