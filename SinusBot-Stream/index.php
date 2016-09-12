@@ -69,7 +69,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 					var videoposter = xhttp.responseText;
 					$('.vjs-poster').css({
 						'background-image': 'url('+videoposter+')',
-						'display': 'block'
+						'display': 'block',
+						'background-size': 'cover'
+
 					});
 				}
 			};
@@ -139,10 +141,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
-		<div class="embed-responsive embed-responsive-4by3">
+		<div class="embed-responsive embed-responsive-16by9">
 				<video id="player" class="player video-js vjs-default-skin embed-responsive-item"
 				controls preload="none" autoplay
-				poster="resources/unknownimg.png"
 				data-setup='{
 				"height": "100%",
 				"width": "100%",
