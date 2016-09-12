@@ -10,14 +10,11 @@ if($findThumbnailFromMetaData){
 		if(($urlFull = resolveURL($urlFromMD)) !== false){ //it is a valid url and has been resolved to a full URL
 	        if(($ytID = getYoutubeID($urlFull)) !== false){ //it's a youtube link
 	        $finalURL = "https://i.ytimg.com/vi/". $ytID ."/sddefault.jpg";
-	    }else{
-	    	echo "3";
+	        if(!returns404($finalURL)) {
+	        	$finalURL = "https://i.ytimg.com/vi/". $ytID ."/hqdefault.jpg";
+	        }
 	    }
-	}else{
-		echo "2";
 	}
-}else{
-	echo "1";
 }
 }
 if($searchForThumbnail && $finalURL == $unknownimg){
@@ -29,6 +26,11 @@ if($useCachedThumbnail && ($finalURL == $unknownimg)){
 		$finalURL = $thumbnailURL;
 	}
 }
+
+if(!returns404($finalURL)){
+	$finalURL = $unknownimg;
+}
+
 echo $finalURL;
 
 ?>

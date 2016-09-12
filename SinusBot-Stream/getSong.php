@@ -57,9 +57,7 @@ function validateURL($url){
         }else{
             return false;
         }
-
-        $file_headers = @get_headers($url);
-        if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+        if(!returns404($url)) {
             return false;
         }
     }catch(Exception $e){
@@ -67,6 +65,14 @@ function validateURL($url){
     }
 
     return $url;
+}
+
+function returns404($url){
+    $file_headers = @get_headers($url);
+    if(!$file_headers || $file_headers[0] == 'HTTP/1.0 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+        return false;
+    }
+    return true;
 }
 
 function resolveURL($url){
