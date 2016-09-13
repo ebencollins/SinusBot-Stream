@@ -10,7 +10,7 @@ $teamspeakJoinLink="ts3server://000.000.000.000?server_uid=SERVER_UID"; //genera
 
 $findThumbnailFromMetaData = true; //should a thumbnail image be extracted from metadata? Currently only works with youtube. (default: true)
 $searchForThumbnail = false; //if no thumbnail can be found based on metadata, should youtube be searched? (CURRENTLY NOT IMPLEMENTED)
-$useCachedThumbnail = false; //if a thumbnail cannot be found online based on the metadata, should it use the VERY low res cached copy? (default: false)
+$useCachedThumbnail = true; //if a thumbnail cannot be found online based on the metadata, should it use the cached copy? (resolution may vary) (default: true)
 //Note: The above three methods are exceuted in that order; ie. if enabled, metadata will be searched first, then if nothing is found search will be used, if nothing found cached thumbnail will be used, if nothing else the default music icon will be displayed.
 
 $instanceIDS = array("UID1","UID1");
