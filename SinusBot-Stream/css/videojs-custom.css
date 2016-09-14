@@ -46,22 +46,6 @@ video-js.vjs-ended .vjs-big-play-button,.video-js.vjs-paused .vjs-big-play-butto
 	display: block
 }
 
-.video-js .vjs-big-play-button {
-	top: 50%;
-	left: 50%;
-	margin-left: -1.5em;
-	margin-top: -1em
-}
-
-.video-js .vjs-big-play-button {
-	background-color: rgba(0,0,0,0.46);
-	font-size: 2.5em;
-	border-radius: 50%;
-	height: 2em !important;
-	line-height: 2em !important;
-	margin-top: -1em !important
-}
-
 .video-js:hover .vjs-big-play-button,.video-js .vjs-big-play-button:focus,.video-js .vjs-big-play-button:active {
 	background-color: rgba(0,188,140,0.6)
 }

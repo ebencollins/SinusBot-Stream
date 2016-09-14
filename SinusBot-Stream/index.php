@@ -143,7 +143,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			</div><!-- /.container-fluid -->
 		</nav>
 		<div class="embed-responsive embed-responsive-16by9">
-				<video id="player" class="player video-js vjs-default-skin embed-responsive-item"
+				<video id="player" class="video-js vjs-default-skin vjs-big-play-centered embed-responsive-item"
 				controls preload="none" autoplay
 				data-setup='{
 				"height": "100%",
