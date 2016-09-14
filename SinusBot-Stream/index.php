@@ -53,6 +53,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<link href="http://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
+	<link href="css/videojs-custom.css" rel="stylesheet">
 	<script src="http://vjs.zencdn.net/4.3/video.js"></script>
 
 	<script type="text/javascript">
@@ -147,15 +148,17 @@ $token = $sinusbot->getWebStreamToken($inst);
 				data-setup='{
 				"height": "100%",
 				"width": "100%",
+				"loadingSpinner": true,
 				"children": {
-				"controlBar": {
-				"children": {
-				"liveDisplay": false,
-				"fullscreenToggle": true,
-				"durationDisplay": false,
-				"currentTimeDisplay": false,
-				"timeDisplay": false,
-				"timeDivider": false
+					"controlBar": {
+						"children": {
+							"liveDisplay": false,
+							"fullscreenToggle": true,
+							"durationDisplay": false,
+							"currentTimeDisplay": false,
+							"timeDisplay": false,
+							"timeDivider": false,
+							"progressControl" : false
 			}
 		}
 	}}'>
