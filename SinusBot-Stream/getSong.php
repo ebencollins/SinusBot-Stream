@@ -42,6 +42,7 @@ function checkMetaDataForURL(){
 }
 
 function validateURL($url){
+    $url = preg_replace('/\s+/S', "", $url);
     try{
         if($urlParts = parse_url($url)){
             if(!isset($urlParts['scheme'])){
