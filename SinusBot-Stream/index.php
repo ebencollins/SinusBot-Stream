@@ -174,6 +174,29 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/mp3">
 	</video>
 
+	<script type="text/javascript">
+		var video = document.getElementById('player');		
+		
+		if(getCookie("volume") != "" && getCookie("volume") != null){
+			video.volume = getCookie("volume");
+		}else{
+			video.volume = 0.5;
+		}
+
+		video.addEventListener("volumechange", function() {
+		 	var d = new Date();
+		 	d.setTime(d.getTime() + (30*24*60*60*1000));
+			var expires = "expires="+ d.toUTCString();
+		 	document.cookie = "volume=" + video.volume + "; " + expires + "; path=/";
+		}, true);
+
+		function getCookie(name) {
+		    var value = "; " + document.cookie;
+		    var parts = value.split("; " + name + "=");
+		    if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+	</script>
+
 </div>
 <div id="songnamediv" align="center"><h5 id="songname">Loading song name...</h5></div>
 </div>
