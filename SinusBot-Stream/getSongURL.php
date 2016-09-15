@@ -9,9 +9,9 @@ if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
 }
 
 if(!empty(getArtist())) {
-    echo '<a href="'.$link.'" target="_blank">Song: '.getName().' from ' .getArtist(). '</a>';
+    echo '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getName().' from ' .getArtist(). '</a>';
 } else {
-    echo '<a href="'.$link.'" target="_blank">Song: '.getName().'</a>';
+    echo '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getName().'</a>';
 }
 
 ?>

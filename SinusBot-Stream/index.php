@@ -3,11 +3,10 @@
 <?php
 
 error_reporting('E_ERROR');
-
+session_start();
 include("header.php");
 include("sinusbot.class.php");
 include("config.php");
-session_start();
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
@@ -49,12 +48,21 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
 
+	<link rel="stylesheet" href="css/icon-font.css"></head>
+
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<link href="http://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
 	<link href="css/videojs-custom.css" rel="stylesheet">
 	<script src="http://vjs.zencdn.net/4.3/video.js"></script>
+
+	<style type="text/css">
+		.songlink{
+			color: rgb(255, 255, 255);
+		}
+
+	</style>
 
 	<script type="text/javascript">
 		function loadSong() {
@@ -111,16 +119,16 @@ $token = $sinusbot->getWebStreamToken($inst);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="."><?php echo $title; ?></a>
+					<a class="navbar-brand" href="."><?php echo $title . " - "; echo isset($_SESSION['inst'])? $instanceNames[$_SESSION['inst']] : ""; ?></a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://github.com/Zahzi/SinusBot-Stream" target="_blank"><img src="resources/github.png" class="img-responsive" height="25px" width="22px" alt="Open source on GitHub!"></img></a></li>
+						<li><a href="https://github.com/Zahzi/SinusBot-Stream" target="_blank"><!-- <img src="resources/github.png" class="img-responsive" height="25px" width="22px" alt="Open source on GitHub!"></img> --><span class="icon-github"></span></a></li>
 						<?php
 						if($teamspeakJoinLink != ""){
-							echo '<li><a href="'.$teamspeakJoinLink.'"><img src="resources/teamspeak.png" class="img-responsive" height="25px" width="22px" alt="Join TS3!"></img></a></li>';
+							echo '<li><a href="'.$teamspeakJoinLink.'"><span class="icon-open"></span></a></li>';
 						}
-						echo '<li><a href="http://'.$ipport.'" target="_blank"><img src="resources/login.png" class="img-responsive" height="25px" width="22px" alt="Login to SinusBot webpanel."></img></a></li>';
+						echo '<li><a href="http://'.$ipport.'" target="_blank"><span class="icon-login"></span></a></li>';
 						?>
 					</ul>
 					<ul class="nav navbar-nav">
