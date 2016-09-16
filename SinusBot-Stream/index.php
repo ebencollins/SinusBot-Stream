@@ -23,9 +23,9 @@ if(isset($_GET['id'])){
 	setcookie("inst", $id, time() + (86400*30), "/");
 }else if(isset($_SESSION['inst'])){
 	$inst = $instanceIDS[$_SESSION['inst']];
-	setcookie("inst", $id, time() + (86400*30), "/");
+	setcookie("inst", $_SESSION['inst'], time() + (86400*30), "/");
 }else if(isset($_COOKIE['inst'])){
-	$_SESSION['inst'] = $id;
+	$_SESSION['inst'] = $_COOKIE['inst'];
 	$inst = $instanceIDS[$_COOKIE['inst']];
 }else{
 	$inst = $instanceIDS[$defaultInstance];
@@ -119,7 +119,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="."><?php echo $title . " - "; echo isset($_SESSION['inst'])? $instanceNames[$_SESSION['inst']] : ""; ?></a>
+					<a class="navbar-brand" href="."><?php echo $title; echo isset($_SESSION['inst'])? " - " . $instanceNames[$_SESSION['inst']] : ""; ?></a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
