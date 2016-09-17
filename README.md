@@ -10,8 +10,16 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 - Last used bot instance and volume stored in cookies
 - Links to join Teamspeak server and login to SinusBot's webpanel on the navigation bar
 
+
 ## Demo
 - Live demo found [here](http://sinusbot.zahzi.us/SinusBot-Stream/)
+
+
+## Known Issues
+- Some browsers do not support the livestream provided by the SinusBot API. It is recomended that you use Chrome/Firefox for full functionality.
+    - Edge and IE on Windows does not work
+    - Safari/Chrome for iOS does not work
+
 
 ## Dependencies
 - Apache 2 Webserver
