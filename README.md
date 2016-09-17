@@ -24,7 +24,7 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 ## Dependencies
 - Apache 2 Webserver
 - PHP 5
-- Php5-Curl
+- PHP-Curl
 - Sinusbot
 - Video.js
 - Bootstrap
