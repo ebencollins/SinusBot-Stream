@@ -32,7 +32,7 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 
 ## Install
 - Go to the directory where you wish to install (typically your web directory)
-- Run the command "git clone https://github.com/Zahzi/SinusBot-Stream.git" 
+- Run the command ```git clone https://github.com/Zahzi/SinusBot-Stream.git```
 - Edit config.php with your server information and preferences
 - Edit sinusbot's config.ini 
     - EnableWebStream = true
