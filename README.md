@@ -35,8 +35,8 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 - Run the command ```git clone https://github.com/Zahzi/SinusBot-Stream.git```
 - Edit config.php with your server information and preferences
 - Edit sinusbot's config.ini 
-    - EnableWebStream = true
-    - SampleInterval = 60
+    - ```EnableWebStream = true```
+    - ```SampleInterval = 60```
 
 
 ## Attributions
