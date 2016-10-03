@@ -17,8 +17,8 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 
 ## Known Issues
 - Some browsers do not support the livestream provided by the SinusBot API. It is recomended that you use Chrome/Firefox for full functionality.
-    - Edge and IE on Windows does not work
-    - Safari/Chrome for iOS does not work
+    - Edge and IE on Windows don't work
+    - Safari/Chrome for iOS don't work
 
 
 ## Dependencies
