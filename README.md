@@ -27,7 +27,7 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 - PHP-Curl
 - Sinusbot
 
-##The following are used, but aren't required locally
+####The following are used, but aren't required locally
 - Video.js
 - Bootstrap
 
