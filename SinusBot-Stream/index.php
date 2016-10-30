@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-
 <?php
 
 error_reporting('E_ERROR');
 session_start();
-include("header.php");
-include("sinusbot.class.php");
 include("config.php");
+include("sinusbot.class.php");
+include("header.php");
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
