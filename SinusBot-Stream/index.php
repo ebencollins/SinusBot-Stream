@@ -63,12 +63,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 	</style>
 
 	<script type="text/javascript">
-		function loadSong() {
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "getSong.php", true);
-			xhttp.send();
-		} 
-
 		function loadImg() {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
@@ -99,7 +93,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 		setInterval(function() {
 			loadImg();
-			loadSong();
 			loadSearch();
 		}, 3500); 
 	</script>
