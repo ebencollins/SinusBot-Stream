@@ -1,6 +1,6 @@
 <?php
 error_reporting('E_ERROR');
-include("getSong.php");
+require("getSong.php");
 $link = 'https://www.google.com/search?q=' . getTrack();
 if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
     if(($urlFull = resolveURL($urlFromMD)) !== false){ //it can be resolved to something

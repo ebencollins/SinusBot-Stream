@@ -2,9 +2,9 @@
 
 error_reporting('E_ERROR');
 session_start();
-include("config.php");
-include("sinusbot.class.php");
-include("header.php");
+require("config.php");
+require("sinusbot.class.php");
+require("header.php");
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];

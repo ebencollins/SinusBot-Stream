@@ -1,7 +1,7 @@
 <?php
 error_reporting('E_ERROR');
-include("sinusbot.class.php");
-include("config.php");
+require("sinusbot.class.php");
+require("config.php");
 session_start();
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);

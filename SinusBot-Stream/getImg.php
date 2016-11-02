@@ -1,6 +1,6 @@
 <?php
 error_reporting('E_ERROR');
-include("getSong.php");
+require("getSong.php");
 
 $unknownimg = "resources/unknownimg.png";
 $finalURL = $unknownimg;
