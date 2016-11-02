@@ -1,5 +1,5 @@
 # SinusBot-Stream
-Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
+Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 ## Features
 - Stream music from your [SinusBot](https://www.sinusbot.com) bots in your browser
@@ -19,8 +19,7 @@ Sinusbot Webstream, a web-based player to stream audio from SinusBot music bots.
 
 ## Known Issues
 - Some browsers do not support the livestream provided by the SinusBot API. It is recomended that you use Chrome/Firefox for full functionality.
-    - Edge and IE on Windows don't work
-    - Safari/Chrome for iOS don't work
+    - The following browsers have been confirmed as being incompatible: Edge and IE on Windows, Safari/Chrome on iOS
 
 
 ## Dependencies
