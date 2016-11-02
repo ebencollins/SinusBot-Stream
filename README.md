@@ -13,6 +13,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 ## Screenshot
 ![Screenshot](http://zahzi.us/screenshots/1478119632.png)
 
+
 ## Demo
 - Live demo found [here](http://sinusbot.zahzi.us/SinusBot-Stream/)
 
@@ -24,8 +25,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 ## Dependencies
 - Apache 2 Webserver
-- PHP 5
-- PHP-Curl
+- php, php-dev, php-curl
 - Sinusbot
 
 ####The following are used, but aren't required locally
@@ -34,6 +34,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 
 ## Install
+- Install all dependencies
 - Go to the directory where you wish to install (typically your web directory)
 - Run the command ```git clone https://github.com/Zahzi/SinusBot-Stream.git```
 - Edit config.php with your server information and preferences
