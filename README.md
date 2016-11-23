@@ -25,7 +25,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 ## Dependencies
 - Apache 2 Webserver
-- php, php-dev, php-curl
+- php, php-dev, php-curl, libapache2-mod-php
 - Sinusbot
 
 ####The following are used, but aren't required locally
