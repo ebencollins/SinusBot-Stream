@@ -12,7 +12,7 @@ $useCachedThumbnail = true; //if stored, should the cached image be used? (quali
 $findThumbnailFromMetaData = true; //should a thumbnail image be extracted from metadata if the cached thumbnail isn't found or is disabled? Currently only works with youtube. (default: true)
 $searchForThumbnail = false; //if no thumbnail can be found based on metadata, should youtube be searched? (CURRENTLY NOT IMPLEMENTED)
 
-$instanceIDS = array("UID1","UID1");
+$instanceIDS = array("UID1","UID2");
 $instanceNames = array("MusicBot #1","MusicBot #2");
 $defaultInstance = 0;
 
