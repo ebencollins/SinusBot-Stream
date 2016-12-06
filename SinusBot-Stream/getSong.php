@@ -1,29 +1,44 @@
 <?php
 error_reporting('E_ERROR');
+session_start();
 require("sinusbot.class.php");
 require("config.php");
-session_start();
 $sinusbot = new SinusBot($ipport);
 $sinusbot->login($user, $passwd);
 $status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
-$track = (array_key_exists('title', $status['currentTrack'])) ? $status['currentTrack']['title'] : $status['currentTrack']['filename'];
-$artist = $status["currentTrack"]["artist"];
-$name = $track;
-$track = preg_replace('^ ^', '+', $track);
 
 function getTrack(){
-	global $track;
-	return $track;
+    global $status;
+    try {
+        if(array_key_exists("title", $status['currentTrack']) && isset($status['currentTrack']['title'])){
+            $track = $status['currentTrack']['title'];
+        }else if(array_key_exists("filename", $status['currentTrack']) && isset($status['currentTrack']['filename'])){
+            $track = $status['currentTrack']['filename'];
+        }else{
+            $track = "";
+        }
+    }catch(Exception $e){
+        $track = "Error in getTrack() in getSong.php";
+    }
+    return $track;
 }
 
 function getName(){
-	global $name;
-	return $name;
+    return getTrack();
 }
 
 function getArtist(){
-	global $artist;
-	return $artist;
+    global $status;
+    try {
+        if(array_key_exists("artist", $status['currentTrack']) && isset($status['currentTrack']['artist'])){
+            $artist = $status['currentTrack']['artist'];
+        }else{
+            $artist = "";
+        }
+    }catch(Exception $e){
+        $artist = "Error in getArtist() in getSong.php";
+    }
+    return $artist;
 }
 
 function checkMetaDataForURL(){
