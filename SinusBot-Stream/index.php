@@ -161,8 +161,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			}
 		}
 	}}'>
-	<!-- <source src="test.mp3" type="audio/mp3"> -->
-	<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/mp3">
+ 	<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/webm">
 	</video>
 
 	<script type="text/javascript">
