@@ -20,7 +20,10 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 ## Known Issues
 - Some browsers do not support the livestream provided by the SinusBot API. It is recomended that you use Chrome/Firefox for full functionality.
-    - The following browsers have been confirmed as being incompatible: Edge and IE on Windows, Safari/Chrome on iOS
+    - The following browsers have been confirmed as being incompatible:
+        - Edge and IE on Windows
+        - Safari on OSX
+        - Safari/Chrome on iOS
 
 
 ## Dependencies
