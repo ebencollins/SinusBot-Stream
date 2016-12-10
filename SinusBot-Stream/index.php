@@ -1,10 +1,10 @@
+<!DOCTYPE html>
 <?php
-
 error_reporting('E_ERROR');
 session_start();
 require("config.php");
 require("sinusbot.class.php");
-require("header.php");
+
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
@@ -37,16 +37,16 @@ $sinusbot->login($user, $passwd);
 $sinusbot->selectInstance($inst);
 $token = $sinusbot->getWebStreamToken($inst);
 
-
 ?>
 
 <html>
 <head>
+<?php require("header.php"); ?>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
 
-	<link rel="stylesheet" href="css/icon-font.css"></head>
+	<link rel="stylesheet" href="css/icon-font.css">
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -59,7 +59,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 		.songlink{
 			color: rgb(255, 255, 255);
 		}
-
+		.center{
+			text-align: center;
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -188,7 +190,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	</script>
 
 </div>
-<div id="songnamediv" align="center"><h5 id="songname">Loading song name...</h5></div>
+<div id="songnamediv" class="center"><h5 id="songname">Loading song name...</h5></div>
 </div>
 
 </body>
