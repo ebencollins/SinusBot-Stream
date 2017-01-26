@@ -1,9 +1,9 @@
 <?php
 error_reporting('E_ERROR');
 session_start();
-require("sinusbot.class.php");
-require("config.php");
-$sinusbot = new SinusBot($ipport);
+require_once("sinusbot.class.php");
+require_once("config.php");
+$sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
 $status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
 

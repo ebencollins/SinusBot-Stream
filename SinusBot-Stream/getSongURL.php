@@ -1,6 +1,6 @@
 <?php
 error_reporting('E_ERROR');
-require("getSong.php");
+require_once("getSong.php");
 
 if(getTrack() == null || getTrack() == ""){
 	$finalURL = '<p>No song name given.</p>';

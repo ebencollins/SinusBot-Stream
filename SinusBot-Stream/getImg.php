@@ -1,13 +1,13 @@
 <?php
 error_reporting('E_ERROR');
-require("getSong.php");
+require_once("getSong.php");
 
 $unknownimg = "resources/unknownimg.png";
 $finalURL = $unknownimg;
 
 if($useCachedThumbnail && $finalURL == $unknownimg){
 	if(array_key_exists('thumbnail', $status['currentTrack'])){
-		$thumbnailURL = "http://" . $ipport . "/cache/" . $status['currentTrack']['thumbnail'];
+		$thumbnailURL = $sinusbotURL . "/cache/" . $status['currentTrack']['thumbnail'];
 		$finalURL = $thumbnailURL;
 	}
 }

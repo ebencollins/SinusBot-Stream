@@ -2,8 +2,8 @@
 <?php
 error_reporting('E_ERROR');
 session_start();
-require("config.php");
-require("sinusbot.class.php");
+require_once("config.php");
+require_once("sinusbot.class.php");
 
 
 if(isset($_GET['id'])){
@@ -32,7 +32,7 @@ if(isset($_GET['id'])){
 }
 
 
-$sinusbot = new SinusBot($ipport);
+$sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
 $sinusbot->selectInstance($inst);
 $token = $sinusbot->getWebStreamToken($inst);
@@ -42,7 +42,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 <html>
 <head>
 <?php require("header.php"); ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
 
@@ -51,9 +51,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<link href="http://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
+	<link href="https://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
 	<link href="css/videojs-custom.css" rel="stylesheet">
-	<script src="http://vjs.zencdn.net/4.3/video.js"></script>
+	<script src="https://vjs.zencdn.net/4.3/video.js"></script>
 
 	<style type="text/css">
 		.songlink{
@@ -121,7 +121,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 						if($teamspeakJoinLink != ""){
 							echo '<li><a href="'.$teamspeakJoinLink.'"><span class="icon-open"></span></a></li>';
 						}
-						echo '<li><a href="http://'.$ipport.'" target="_blank"><span class="icon-login"></span></a></li>';
+						echo '<li><a href="'.$sinusbotURL.'" target="_blank"><span class="icon-login"></span></a></li>';
 						?>
 					</ul>
 					<ul class="nav navbar-nav">
@@ -163,7 +163,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			}
 		}
 	}}'>
- 	<source src="http://<?php echo $ipport; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/webm">
+ 	<source src="<?php echo $sinusbotURL; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/webm">
 	</video>
 
 	<script type="text/javascript">
