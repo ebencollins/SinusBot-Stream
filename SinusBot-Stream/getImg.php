@@ -2,7 +2,7 @@
 error_reporting('E_ERROR');
 require_once("getSong.php");
 
-$unknownimg = "resources/unknownimg.png";
+$unknownimg = $defaultThumbnail;;
 $finalURL = $unknownimg;
 
 if($useCachedThumbnail && $finalURL == $unknownimg){
