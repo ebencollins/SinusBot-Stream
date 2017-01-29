@@ -7,6 +7,69 @@ $sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
 $status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
 
+// MARK: POST
+if (isset($_POST['getData'])) {
+	$returnData = array(
+		"img" => "",
+		"songname" => ""
+		);
+	if(getTrack() == null || getTrack() == ""){
+		$finalURL = '<p>No song name given.</p>';
+	}else{
+		$link = 'https://www.google.com/search?q=' . getTrack();
+		if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
+		    if(($urlFull = resolveURL($urlFromMD)) !== false){ //it can be resolved to something
+		    	$link = $urlFull;
+		    }
+		}
+		if(getArtist() != "" && getArtist() != null) {
+			$finalURL = '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getTrack().' from ' .getArtist(). '</a>';
+		} else {
+			$finalURL = '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getTrack().'</a>';
+		}
+	}
+	$returnData['songname'] = $finalURL;
+
+	$unknownimg = $defaultThumbnail;;
+	$finalURL = $unknownimg;
+
+	if($useCachedThumbnail && $finalURL == $unknownimg){
+		if(array_key_exists('thumbnail', $status['currentTrack'])){
+			$thumbnailURL = $sinusbotURL . "/cache/" . $status['currentTrack']['thumbnail'];
+			$finalURL = $thumbnailURL;
+		}
+	}
+	if($findThumbnailFromMetaData && $finalURL == $unknownimg){
+		if(($urlFromMD = checkMetaDataForURL()) !== false){ //metdata contains a link
+			if(($urlFull = resolveURL($urlFromMD)) !== false){ //it is a valid url and has been resolved to a full URL
+		        if(($ytID = getYoutubeID($urlFull)) !== false){ //it's a youtube link
+		        $finalURL = "https://i.ytimg.com/vi/". $ytID ."/sddefault.jpg";
+		        	if(!returns404($finalURL)) {
+		        		$finalURL = "https://i.ytimg.com/vi/". $ytID ."/hqdefault.jpg";
+		       		 }
+		 	   	}
+			}
+		}
+	}
+	if($searchForThumbnail && $finalURL == $unknownimg){
+	// implement at some point
+	}
+
+	if(!returns404($finalURL)){
+		$finalURL = $unknownimg;
+	}
+
+	$returnData['img'] = $finalURL;
+
+	echo (json_encode($returnData));
+
+}
+elseif(isset($_POST['getWebStream'])){
+	echo $sinusbot->getWebStream($instanceIDS[$_SESSION['inst']]);
+}
+
+
+// MARK: FUNCTIONS
 function getTrack(){
     global $status;
     try {

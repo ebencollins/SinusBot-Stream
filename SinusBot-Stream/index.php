@@ -41,7 +41,23 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 <html>
 <head>
-<?php require("header.php"); ?>
+	<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="faviconfavicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
@@ -65,37 +81,45 @@ $token = $sinusbot->getWebStreamToken($inst);
 	</style>
 
 	<script type="text/javascript">
-		function loadImg() {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					var videoposter = xhttp.responseText;
-					$('.vjs-poster').css({
-						'background-image': 'url('+videoposter+')',
-						'display': 'block',
-						'background-size': 'cover'
+		function getData(){
+			$.ajax({
+				url: 'util.php',
+				type: 'POST',
+				data: {getData: true},
+				beforeSend: function() {},
+				success: function(data) {
+					parsed = JSON.parse(data);
+        			$('.vjs-poster').css({
+	    				'background-image': 'url('+parsed['img']+')',
+	    				'display': 'block',
+	    				'background-size': 'cover'
 
-					});
-				}
-			};
-			xhttp.open("GET", "getImg.php", true);
-			xhttp.send();
+	    			});
+					$("#songname").html(parsed['songname']);
+           		}
+        	});
 		}
 
-		function loadSearch() {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					document.getElementById("songname").innerHTML = xhttp.responseText;
-				}
-			};
-			xhttp.open("GET", "getSongURL.php", true);
-			xhttp.send();
+		function updateWebStream(){
+			$.ajax({
+				url: 'util.php',
+				type: 'POST',
+				data: {getWebStream: true},
+				beforeSend: function() {},
+				success: function(data) {
+					player = videojs("player");
+					playerSource = $("#playersource");
+					player.pause();
+					playerSource.attr("src", data);
+					player.load();
+					player.play();
+           		}
+        	});
 		}
+	
 
 		setInterval(function() {
-			loadImg();
-			loadSearch();
+			getData();
 		}, 3500); 
 	</script>
 	<title><?php echo $title; ?></title>
@@ -145,7 +169,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 		</nav>
 		<div class="embed-responsive embed-responsive-16by9">
 				<video id="player" class="video-js vjs-default-skin vjs-big-play-centered embed-responsive-item"
-				controls preload="none" autoplay
+				controls preload="none" autoplay 
 				data-setup='{
 				"height": "100%",
 				"width": "100%",
@@ -163,7 +187,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			}
 		}
 	}}'>
- 	<source src="<?php echo $sinusbotURL; ?>/api/v1/bot/i/<?php echo $inst; ?>/stream/<?php echo $sinusbot->getWebStreamToken($inst); ?>" type="audio/webm">
+	<source id = "playersource" src="<?php echo $sinusbot->getWebStream(); ?>" type="audio/ogg">
 	</video>
 
 	<script type="text/javascript">
@@ -175,6 +199,12 @@ $token = $sinusbot->getWebStreamToken($inst);
 			video.volume = 0.5;
 		}
 
+		function getCookie(name) {
+		    var value = "; " + document.cookie;
+		    var parts = value.split("; " + name + "=");
+		    if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+
 		video.addEventListener("volumechange", function() {
 		 	var d = new Date();
 		 	d.setTime(d.getTime() + (30*24*60*60*1000));
@@ -182,11 +212,15 @@ $token = $sinusbot->getWebStreamToken($inst);
 		 	document.cookie = "volume=" + video.volume + "; " + expires + "; path=/";
 		}, true);
 
-		function getCookie(name) {
-		    var value = "; " + document.cookie;
-		    var parts = value.split("; " + name + "=");
-		    if (parts.length == 2) return parts.pop().split(";").shift();
+		function stoppedEventListener(){
+			updateWebStream();
+			console.log("Fs");
 		}
+		video.addEventListener("ended", stoppedEventListener);
+		video.addEventListener("error", stoppedEventListener);
+		video.addEventListener("suspend", stoppedEventListener);
+
+
 	</script>
 
 </div>
