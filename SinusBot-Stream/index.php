@@ -58,18 +58,18 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
-
+	<link href="https://vjs.zencdn.net/5.16.0/video-js.css" rel="stylesheet">
+	<link href="css/videojs-custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/icon-font.css">
 
-	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://vjs.zencdn.net/5.16.0/video.js"></script>
 
-	<link href="https://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
-	<link href="css/videojs-custom.css" rel="stylesheet">
-	<script src="https://vjs.zencdn.net/4.3/video.js"></script>
+
 
 	<style type="text/css">
 		.songlink{
@@ -95,6 +95,8 @@ $token = $sinusbot->getWebStreamToken($inst);
 	    				'background-size': 'cover'
 
 	    			});
+
+	    			$("#player .vjs-poster").css('background-image', 'url('+parsed['img']+')').show();
 					$("#songname").html(parsed['songname']);
            		}
         	});
@@ -168,64 +170,74 @@ $token = $sinusbot->getWebStreamToken($inst);
 			</div><!-- /.container-fluid -->
 		</nav>
 		<div class="embed-responsive embed-responsive-16by9">
-				<video id="player" class="video-js vjs-default-skin vjs-big-play-centered embed-responsive-item"
+				<video id="player" class="video-js vjs-poster vjs-default-skin vjs-big-play-centered embed-responsive-item"
 				controls preload="none" autoplay 
 				data-setup='{
 				"height": "100%",
 				"width": "100%",
-				"loadingSpinner": true,
-				"children": {
-					"controlBar": {
-						"children": {
-							"liveDisplay": false,
-							"fullscreenToggle": true,
-							"durationDisplay": false,
-							"currentTimeDisplay": false,
-							"timeDisplay": false,
-							"timeDivider": false,
-							"progressControl" : false
-			}
-		}
-	}}'>
+				"loadingSpinner": true}'>
 	<source id = "playersource" src="<?php echo $sinusbot->getWebStream(); ?>" type="audio/ogg">
 	</video>
-
-	<script type="text/javascript">
-		var video = document.getElementById('player');		
-		
-		if(getCookie("volume") != "" && getCookie("volume") != null){
-			video.volume = getCookie("volume");
-		}else{
-			video.volume = 0.5;
-		}
-
-		function getCookie(name) {
-		    var value = "; " + document.cookie;
-		    var parts = value.split("; " + name + "=");
-		    if (parts.length == 2) return parts.pop().split(";").shift();
-		}
-
-		video.addEventListener("volumechange", function() {
-		 	var d = new Date();
-		 	d.setTime(d.getTime() + (30*24*60*60*1000));
-			var expires = "expires="+ d.toUTCString();
-		 	document.cookie = "volume=" + video.volume + "; " + expires + "; path=/";
-		}, true);
-
-		function stoppedEventListener(){
-			updateWebStream();
-			console.log("Fs");
-		}
-		video.addEventListener("ended", stoppedEventListener);
-		video.addEventListener("error", stoppedEventListener);
-		video.addEventListener("suspend", stoppedEventListener);
-
-
-	</script>
 
 </div>
 <div id="songnamediv" class="center"><h5 id="songname">Loading song name...</h5></div>
 </div>
+
+<script type="text/javascript">
+
+	var ButtonComponent = videojs.getComponent('Button');
+	var ReloadButtonComponent = videojs.extend(ButtonComponent, {
+	    constructor: function () {
+	        ButtonComponent.call(this, player);
+	    },
+	    handleClick: function () {
+	        updateWebStream();
+	    },
+	    buildCSSClass: function () {
+	        return 'vjs-control vjs-download-button';
+	    },
+	    createControlTextEl: function (button) {
+	        return $(button).html($('<span class="icon-spinner11"></span>').attr('title', 'Reload'));
+	    }
+	});
+
+
+	
+	var player = videojs('player');
+	player.controlBar.addChild(new ReloadButtonComponent(), {}, 1);
+
+
+	var video = document.getElementById('player');		
+	
+	if(getCookie("volume") != "" && getCookie("volume") != null){
+		video.volume = getCookie("volume");
+	}else{
+		video.volume = 0.5;
+	}
+
+	function getCookie(name) {
+	    var value = "; " + document.cookie;
+	    var parts = value.split("; " + name + "=");
+	    if (parts.length == 2) return parts.pop().split(";").shift();
+	}
+
+	video.addEventListener("volumechange", function() {
+	 	var d = new Date();
+	 	d.setTime(d.getTime() + (30*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+	 	document.cookie = "volume=" + video.volume + "; " + expires + "; path=/";
+	}, true);
+
+	function stoppedEventListener(){
+		updateWebStream();
+		console.log("Fs");
+	}
+	video.addEventListener("ended", stoppedEventListener);
+	video.addEventListener("error", stoppedEventListener);
+	video.addEventListener("suspend", stoppedEventListener);
+
+
+</script>
 
 </body>
 </html>
