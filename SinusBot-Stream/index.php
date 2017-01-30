@@ -82,6 +82,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<script type="text/javascript">
 		var currentInst = "<?php echo $inst; ?>";
 		var currentInstName = "<?php echo isset($_SESSION['inst'])? " - " . $instanceNames[$_SESSION['inst']] : ""; ?>";
+        currentInstID = 0; //
 		var siteTitle = "<?php echo $title; ?>";
 		function getData(){
 			$.ajax({
@@ -138,7 +139,10 @@ $token = $sinusbot->getWebStreamToken($inst);
 					player.play();
 					currentInst = parsed['instance'];
 					currentInstName = parsed['instanceName'];
+                    currentInstID = parsed['instanceID'];
 					$(".navbar-brand").html(siteTitle + " - " + currentInstName);
+                    $('#instance-dropdown').children().removeClass("active");
+                    $('#instance-dropdown').children().eq(currentInstID).addClass("active");
            		}
         	});
 		}
@@ -183,7 +187,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 					</ul>
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Bot <span class="caret"></span></a><ul class="dropdown-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Bot <span class="caret"></span></a><ul id="instance-dropdown" class="dropdown-menu">
 								<?php 
 								for($i = 0; $i < count($instanceNames); $i++){
 									if($i == array_search($inst, $instanceIDS)){
