@@ -85,7 +85,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
-				data: {getData: true},
+				data: {getData: "<?php echo $inst; ?>"},
 				beforeSend: function() {},
 				success: function(data) {
 					parsed = JSON.parse(data);
@@ -106,7 +106,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
-				data: {getWebStream: true},
+				data: {getWebStream: "<?php echo $inst; ?>"},
 				beforeSend: function() {},
 				success: function(data) {
 					player = videojs("player");

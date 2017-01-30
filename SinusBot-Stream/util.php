@@ -5,10 +5,11 @@ require_once("sinusbot.class.php");
 require_once("config.php");
 $sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
-$status = $sinusbot->getStatus($instanceIDS[$_SESSION['inst']]);
+$status = $sinusbot->getStatus($instanceIDS[$defaultInstance]);
 
 // MARK: POST
 if (isset($_POST['getData'])) {
+    $status = $sinusbot->getStatus($_POST['getData']);
 	$returnData = array(
 		"img" => "",
 		"songname" => ""
@@ -65,6 +66,7 @@ if (isset($_POST['getData'])) {
 
 }
 elseif(isset($_POST['getWebStream'])){
+    $status = $sinusbot->getStatus($_POST['getData']);
 	echo $sinusbot->getWebStream($instanceIDS[$_SESSION['inst']]);
 }
 
