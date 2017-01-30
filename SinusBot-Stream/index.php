@@ -204,7 +204,10 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 	
 	var player = videojs('player');
-	player.controlBar.addChild(new ReloadButtonComponent(), {}, 1);
+	<?php if($enableReloadBtn){
+		echo 'player.controlBar.addChild(new ReloadButtonComponent(), {}, 1);';
+		}
+	?>
 
 
 	var video = document.getElementById('player');		
@@ -225,7 +228,12 @@ $token = $sinusbot->getWebStreamToken($inst);
 	 	var d = new Date();
 	 	d.setTime(d.getTime() + (30*24*60*60*1000));
 		var expires = "expires="+ d.toUTCString();
-	 	document.cookie = "volume=" + player.volume() + "; " + expires + "; path=/";
+		var volume = player.volume();
+		if(player.muted()){
+			volume = 0.0;
+		}
+	 	document.cookie = "volume=" + volume + "; " + expires + "; path=/";
+
 	}, true);
 
 	function stoppedEventListener(){
