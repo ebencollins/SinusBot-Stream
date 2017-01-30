@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 error_reporting('E_ERROR');
-session_start();
 require_once("config.php");
 require_once("sinusbot.class.php");
 
@@ -81,11 +80,14 @@ $token = $sinusbot->getWebStreamToken($inst);
 	</style>
 
 	<script type="text/javascript">
+		var currentInst = "<?php echo $inst; ?>";
+		var currentInstName = "<?php echo isset($_SESSION['inst'])? " - " . $instanceNames[$_SESSION['inst']] : ""; ?>";
+		var siteTitle = "<?php echo $title; ?>";
 		function getData(){
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
-				data: {getData: "<?php echo $inst; ?>"},
+				data: {getData: currentInst},
 				beforeSend: function() {},
 				success: function(data) {
 					parsed = JSON.parse(data);
@@ -106,18 +108,47 @@ $token = $sinusbot->getWebStreamToken($inst);
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
-				data: {getWebStream: "<?php echo $inst; ?>"},
+				data: {getWebStream: currentInst},
 				beforeSend: function() {},
 				success: function(data) {
+					parsed = JSON.parse(data);
 					player = videojs("player");
 					playerSource = $("#playersource");
 					player.pause();
-					playerSource.attr("src", data);
+					playerSource.attr("src", parsed['webstream']);
 					player.load();
 					player.play();
            		}
         	});
 		}
+
+		function changeWebStream(inst){
+			$.ajax({
+				url: 'util.php',
+				type: 'POST',
+				data: {getWebStream: inst},
+				beforeSend: function() {},
+				success: function(data) {
+					parsed = JSON.parse(data);
+					player = videojs("player");
+					playerSource = $("#playersource");
+					player.pause();
+					playerSource.attr("src", parsed['webstream']);
+					player.load();
+					player.play();
+					currentInst = parsed['instance'];
+					currentInstName = parsed['instanceName'];
+					$(".navbar-brand").html(siteTitle + " - " + currentInstName);
+           		}
+        	});
+		}
+		
+
+		$(document).ready(function(){
+		    $(".botlink").click(function(event){
+		        event.preventDefault();
+		    });
+		});
 	
 
 		setInterval(function() {
@@ -152,14 +183,13 @@ $token = $sinusbot->getWebStreamToken($inst);
 					</ul>
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Bot <span class="caret"></span></a>
-							<ul class="dropdown-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Bot <span class="caret"></span></a><ul class="dropdown-menu">
 								<?php 
 								for($i = 0; $i < count($instanceNames); $i++){
 									if($i == array_search($inst, $instanceIDS)){
-										echo '<li class="active"><a href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
+										echo '<li class="active"><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
 									}else{
-										echo '<li><a href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
+										echo '<li class=""><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
 									}
 								}
 								?>
@@ -243,6 +273,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	video.addEventListener("ended", stoppedEventListener);
 	video.addEventListener("error", stoppedEventListener);
 	video.addEventListener("suspend", stoppedEventListener);
+
 
 
 </script>

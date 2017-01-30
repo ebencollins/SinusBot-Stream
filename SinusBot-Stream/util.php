@@ -1,6 +1,5 @@
 <?php
 error_reporting('E_ERROR');
-session_start();
 require_once("sinusbot.class.php");
 require_once("config.php");
 $sinusbot = new SinusBot($sinusbotURL);
@@ -66,8 +65,18 @@ if (isset($_POST['getData'])) {
 
 }
 elseif(isset($_POST['getWebStream'])){
-    $status = $sinusbot->getStatus($_POST['getData']);
-	echo $sinusbot->getWebStream($instanceIDS[$_SESSION['inst']]);
+    $returnArr = array(
+        "webstream" => "",
+        "instance" => "",
+        "instanceID" => 0,
+        "instanceName" => ""
+    );
+
+	$returnArr['webstream'] = $sinusbot->getWebStream($_POST['getWebStream']);
+    $returnArr['instance'] = $_POST['getWebStream'];
+    $returnArr['instanceID'] = array_search($_POST['getWebStream'], $instanceIDS);
+    $returnArr['instanceName'] = $instanceNames[$returnArr['instanceID']];
+    echo(json_encode($returnArr));
 }
 
 
