@@ -170,14 +170,14 @@ $token = $sinusbot->getWebStreamToken($inst);
 			</div><!-- /.container-fluid -->
 		</nav>
 		<div class="embed-responsive embed-responsive-16by9">
-				<video id="player" class="video-js vjs-poster vjs-default-skin vjs-big-play-centered embed-responsive-item"
+			<video id="player" class="video-js vjs-poster vjs-default-skin vjs-big-play-centered embed-responsive-item"
 				controls preload="none" autoplay 
 				data-setup='{
 				"height": "100%",
 				"width": "100%",
 				"loadingSpinner": true}'>
-	<source id = "playersource" src="<?php echo $sinusbot->getWebStream(); ?>" type="audio/ogg">
-	</video>
+				<source id = "playersource" src="<?php echo $sinusbot->getWebStream(); ?>" type="audio/ogg">
+			</video>
 
 </div>
 <div id="songnamediv" class="center"><h5 id="songname">Loading song name...</h5></div>
@@ -209,11 +209,11 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 	var video = document.getElementById('player');		
 	
+	var volume = 0.5;
 	if(getCookie("volume") != "" && getCookie("volume") != null){
-		video.volume = getCookie("volume");
-	}else{
-		video.volume = 0.5;
+		volume = getCookie("volume");
 	}
+	player.volume(volume);
 
 	function getCookie(name) {
 	    var value = "; " + document.cookie;
@@ -225,12 +225,12 @@ $token = $sinusbot->getWebStreamToken($inst);
 	 	var d = new Date();
 	 	d.setTime(d.getTime() + (30*24*60*60*1000));
 		var expires = "expires="+ d.toUTCString();
-	 	document.cookie = "volume=" + video.volume + "; " + expires + "; path=/";
+	 	document.cookie = "volume=" + player.volume() + "; " + expires + "; path=/";
 	}, true);
 
 	function stoppedEventListener(){
 		updateWebStream();
-		console.log("Fs");
+		console.log("Stopped event listener: Reloading stream.");
 	}
 	video.addEventListener("ended", stoppedEventListener);
 	video.addEventListener("error", stoppedEventListener);
