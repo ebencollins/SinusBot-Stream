@@ -26,9 +26,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 ## TODO
 - Logging
-- Condense files
 - Caching of API data to reduce logins
-- New API key when player stops
 - Support for more browsers
 - Bot Control?
 
