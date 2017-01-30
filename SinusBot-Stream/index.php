@@ -7,7 +7,7 @@ require_once("sinusbot.class.php");
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
-	if(!is_numeric((int)$id)){
+	if(is_numeric($id) == false){
 		echo "Error: Invalid value for \"id\".";
 		return;
 	}
@@ -16,20 +16,15 @@ if(isset($_GET['id'])){
 		return;
 	}
 	$inst = $instanceIDS[$id];
-	$_SESSION['inst'] = $id;
 	setcookie("inst", $id, time() + (86400*30), "/");
-}else if(isset($_SESSION['inst'])){
-	$inst = $instanceIDS[$_SESSION['inst']];
-	setcookie("inst", $_SESSION['inst'], time() + (86400*30), "/");
 }else if(isset($_COOKIE['inst'])){
-	$_SESSION['inst'] = $_COOKIE['inst'];
 	$inst = $instanceIDS[$_COOKIE['inst']];
+    $id = $_COOKIE['inst'];
 }else{
 	$inst = $instanceIDS[$defaultInstance];
-	$_SESSION['inst'] = $defaultInstance;
+    $id = $defaultInstance;
 	setcookie("inst", $defaultInstance, time() + (86400*30), "/");
 }
-
 
 $sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
@@ -68,8 +63,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://vjs.zencdn.net/5.16.0/video.js"></script>
 
-
-
 	<style type="text/css">
 		.songlink{
 			color: rgb(255, 255, 255);
@@ -81,7 +74,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 	<script type="text/javascript">
 		var currentInst = "<?php echo $inst; ?>";
-		var currentInstName = "<?php echo isset($_SESSION['inst'])? " - " . $instanceNames[$_SESSION['inst']] : ""; ?>";
+		var currentInstName = "<?php echo isset($id)? " - " . $instanceNames[$id] : ""; ?>";
         currentInstID = 0; //
 		var siteTitle = "<?php echo $title; ?>";
 		function getData(){
@@ -98,7 +91,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 	    				'background-size': 'cover'
 
 	    			});
-
 	    			$("#player .vjs-poster").css('background-image', 'url('+parsed['img']+')').show();
 					$("#songname").html(parsed['songname']);
            		}
@@ -146,7 +138,6 @@ $token = $sinusbot->getWebStreamToken($inst);
            		}
         	});
 		}
-		
 
 		$(document).ready(function(){
 		    $(".botlink").click(function(event){
@@ -154,7 +145,6 @@ $token = $sinusbot->getWebStreamToken($inst);
 		    });
 		});
 	
-
 		setInterval(function() {
 			getData();
 		}, 3500); 
@@ -173,7 +163,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="."><?php echo $title; echo isset($_SESSION['inst'])? " - " . $instanceNames[$_SESSION['inst']] : ""; ?></a>
+					<a class="navbar-brand" href="."><?php echo $title; echo isset($id)? " - " . $instanceNames[$id] : ""; ?></a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
@@ -191,9 +181,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 								<?php 
 								for($i = 0; $i < count($instanceNames); $i++){
 									if($i == array_search($inst, $instanceIDS)){
-										echo '<li class="active"><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
+										echo '<li class="active"><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="#">'.$instanceNames[$i].'</a></li>';
 									}else{
-										echo '<li class=""><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="?id='.$i.'">'.$instanceNames[$i].'</a></li>';
+										echo '<li class=""><a class="botlink" id="botlink'.$i.'" onclick="changeWebStream(\''.$instanceIDS[$i].'\');" href="#">'.$instanceNames[$i].'</a></li>';
 									}
 								}
 								?>
