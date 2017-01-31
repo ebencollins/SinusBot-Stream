@@ -76,15 +76,16 @@ $token = $sinusbot->getWebStreamToken($inst);
 	</style>
 
 	<script type="text/javascript">
+        var enableRefreshData = true;
 		var currentInst = "<?php echo $inst; ?>";
 		var currentInstName = "<?php echo isset($id)? " - " . $instanceNames[$id] : ""; ?>";
         currentInstID = 0; //
 		var siteTitle = "<?php echo $title; ?>";
-		function getData(){
+		function getData(inst){
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
-				data: {getData: currentInst},
+				data: {getData: inst},
 				beforeSend: function() {},
 				success: function(data) {
 					parsed = JSON.parse(data);
@@ -101,24 +102,12 @@ $token = $sinusbot->getWebStreamToken($inst);
 		}
 
 		function updateWebStream(){
-			$.ajax({
-				url: 'util.php',
-				type: 'POST',
-				data: {getWebStream: currentInst},
-				beforeSend: function() {},
-				success: function(data) {
-					parsed = JSON.parse(data);
-					player = videojs("player");
-					playerSource = $("#playersource");
-					player.pause();
-					playerSource.attr("src", parsed['webstream']);
-					player.load();
-					player.play();
-           		}
-        	});
+            changeWebStream(currentInst);
 		}
 
 		function changeWebStream(inst){
+            enableRefreshData = false;
+            getData(inst);
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
@@ -138,6 +127,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 					$(".navbar-brand").html(siteTitle + " - " + currentInstName);
                     $('#instance-dropdown').children().removeClass("active");
                     $('#instance-dropdown').children().eq(currentInstID).addClass("active");
+                    enableRefreshData = true;
            		}
         	});
 		}
@@ -149,7 +139,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 		});
 	
 		setInterval(function() {
-			getData();
+            if(enableRefreshData){
+			    getData(currentInst);
+            }
 		}, 3500); 
 	</script>
 	<title><?php echo $title; ?></title>
