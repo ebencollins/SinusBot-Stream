@@ -4,7 +4,10 @@ error_reporting('E_ERROR');
 require_once("config.php");
 require_once("sinusbot.class.php");
 
-
+if(count($instanceIDS) !== count($instanceNames)){
+	echo "Error: Length of instanceIDS is ".count($instanceIDS).", but length of instanceNames is ".count($instanceNames).".";
+	return;
+}
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 	if(is_numeric($id) == false){
@@ -202,10 +205,9 @@ $token = $sinusbot->getWebStreamToken($inst);
 				"loadingSpinner": true}'>
 				<source id = "playersource" src="<?php echo $sinusbot->getWebStream(); ?>" type="audio/ogg">
 			</video>
-
-</div>
-<div id="songnamediv" class="center"><h5 id="songname">Loading song name...</h5></div>
-</div>
+		</div> <!-- .embed-reponsive -->
+		<div id="songnamediv" class="center"><h5 id="songname">Loading song name...</h5></div>
+	</div> <!-- .container -->
 
 <script type="text/javascript">
 
@@ -232,9 +234,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 		echo 'player.controlBar.addChild(new ReloadButtonComponent(), {}, 1);';
 		}
 	?>
-
-
-	var video = document.getElementById('player');		
+	
 	
 	var volume = 0.5;
 	if(getCookie("volume") != "" && getCookie("volume") != null){
@@ -248,6 +248,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	    if (parts.length == 2) return parts.pop().split(";").shift();
 	}
 
+	var video = document.getElementById('player');	
 	video.addEventListener("volumechange", function() {
 	 	var d = new Date();
 	 	d.setTime(d.getTime() + (30*24*60*60*1000));
