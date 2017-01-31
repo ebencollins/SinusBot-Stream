@@ -220,7 +220,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 	        updateWebStream();
 	    },
 	    buildCSSClass: function () {
-	        return 'vjs-control vjs-download-button';
+	        return 'vjs-button vjs-control vjs-reload-button';
 	    },
 	    createControlTextEl: function (button) {
 	        return $(button).html($('<span class="icon-spinner11"></span>').attr('title', 'Reload'));
