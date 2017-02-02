@@ -9,25 +9,31 @@ $status = $sinusbot->getStatus($instanceIDS[$defaultInstance]);
 // MARK: POST
 if (isset($_POST['getData'])) {
     $status = $sinusbot->getStatus($_POST['getData']);
-	$returnData = array(
-		"img" => "",
-		"songname" => ""
-		);
-	if(getTrack() == null || getTrack() == ""){
-		$finalURL = '<p>No song name given.</p>';
-	}else{
-		$link = 'https://www.google.com/search?q=' . getTrack();
+    $returnData = array(
+      "img" => "",
+      "songname" => ""
+      );
+    if(getTrack() == null || getTrack() == ""){
+      $finalURL = '<p>No song name given.</p>';
+  }else{
+      $link = 'https://www.google.com/search?q=' . getTrack();
 		if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
 		    if(($urlFull = resolveURL($urlFromMD)) !== false){ //it can be resolved to something
 		    	$link = $urlFull;
 		    }
 		}
+        if(returns404($link)){
+          $link = "";
+        }
 		if(getArtist() != "" && getArtist() != null) {
 			$finalURL = '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getTrack().' from ' .getArtist(). '</a>';
 		} else {
 			$finalURL = '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getTrack().'</a>';
 		}
 	}
+    if(strlen($finalURL) > 1000){
+        $finalURL = '<a class="songlink" href="#" target="_blank">Error getting songname.</a>';
+    }
 	$returnData['songname'] = $finalURL;
 
 	$unknownimg = $defaultThumbnail;;
@@ -44,24 +50,24 @@ if (isset($_POST['getData'])) {
 			if(($urlFull = resolveURL($urlFromMD)) !== false){ //it is a valid url and has been resolved to a full URL
 		        if(($ytID = getYoutubeID($urlFull)) !== false){ //it's a youtube link
 		        $finalURL = "https://i.ytimg.com/vi/". $ytID ."/sddefault.jpg";
-		        	if(!returns404($finalURL)) {
-		        		$finalURL = "https://i.ytimg.com/vi/". $ytID ."/hqdefault.jpg";
-		       		 }
-		 	   	}
-			}
-		}
-	}
-	if($searchForThumbnail && $finalURL == $unknownimg){
+             if(returns404($finalURL)) {
+                $finalURL = "https://i.ytimg.com/vi/". $ytID ."/hqdefault.jpg";
+            }
+        }
+    }
+}
+}
+if($searchForThumbnail && $finalURL == $unknownimg){
 	// implement at some point
-	}
+}
 
-	if(!returns404($finalURL)){
-		$finalURL = $unknownimg;
-	}
+if(returns404($finalURL) || strlen($finalURL) > 1000){
+  $finalURL = $unknownimg;
+}
 
-	$returnData['img'] = $finalURL;
+$returnData['img'] = $finalURL;
 
-	echo (json_encode($returnData));
+echo (json_encode($returnData));
 
 }
 elseif(isset($_POST['getWebStream'])){
@@ -70,9 +76,9 @@ elseif(isset($_POST['getWebStream'])){
         "instance" => "",
         "instanceID" => 0,
         "instanceName" => ""
-    );
+        );
 
-	$returnArr['webstream'] = $sinusbot->getWebStream($_POST['getWebStream']);
+    $returnArr['webstream'] = $sinusbot->getWebStream($_POST['getWebStream']);
     $returnArr['instance'] = $_POST['getWebStream'];
     $returnArr['instanceID'] = array_search($_POST['getWebStream'], $instanceIDS);
     $returnArr['instanceName'] = $instanceNames[$returnArr['instanceID']];
@@ -147,7 +153,7 @@ function validateURL($url){
         }else{
             return false;
         }
-        if(!returns404($url)) {
+        if(returns404($url)) {
             return false;
         }
     }catch(Exception $e){
@@ -158,11 +164,18 @@ function validateURL($url){
 }
 
 function returns404($url){
-    $file_headers = @get_headers($url);
-    if(!$file_headers || $file_headers[0] == 'HTTP/1.0 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+    try{
+        $file_headers = @get_headers($url);
+        if(!$file_headers || $file_headers[0] == 'HTTP/1.0 404 Not Found' || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    catch(Exception $e){
         return false;
     }
-    return true;
+    return false;
 }
 
 function resolveURL($url){
@@ -176,13 +189,13 @@ function resolveURL($url){
 
         for($i=0;$i<count($fields);$i++){
             if(strpos($fields[$i],'Location') !== false){
-               $url = str_replace("Location: ","",$fields[$i]);
-           }
-       }
-       return $url;
-   }catch(Exception $e){
-      return false;   
-  }
+             $url = str_replace("Location: ","",$fields[$i]);
+         }
+     }
+     return $url;
+ }catch(Exception $e){
+  return false;   
+}
 }
 
 
