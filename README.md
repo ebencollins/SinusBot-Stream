@@ -57,6 +57,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 ## Install (detailed)
 ### Linux
 **Note that this was written for Ubuntu 16.04, however, you should be able to adapt it without too much difficulty.**
+
 1. Install dependencies: ```apt-get update -y && apt-get install apache2 php php-curl libapache2-mod-php git -y```
 
 2. Restart apache2: ```service apache2 restart```
