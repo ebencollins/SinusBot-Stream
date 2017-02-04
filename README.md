@@ -21,6 +21,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 
 
 ## Known Issues
+- Reload icon on the player doesn't have shadow on hover.
 - Some browsers do not support the livestream provided by the SinusBot API. 
     - The following browsers *should* work:
         - Chrome
