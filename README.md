@@ -6,6 +6,7 @@ Sinusbot-Stream, a web-based player to stream audio from SinusBot bot instances.
 - Webpage using [Bootstrap](https://getbootstrap.com/) and [VideoJS](http://videojs.com/)
 - Displays album art from cached file or from youtube based on metadata
 - Displays song name with link to video (if found in metadata) or link to google search
+- Player should reload when source fails or player throws an error
 - Support to switch between multiple bot instances via a dropdown or URL
 - Last used bot instance and volume stored in cookies
 - Links to join Teamspeak server and login to SinusBot's webpanel on the navigation bar
