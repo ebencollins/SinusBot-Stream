@@ -137,6 +137,12 @@ $token = $sinusbot->getWebStreamToken($inst);
 		        event.preventDefault();
 		    });
 		});
+
+		window.addEventListener('error', function(e) {
+			console.log("there was a fucking error m8 (reloading player with new source):");
+		    console.log(e);
+		    updateWebStream();
+		}, true);
 	
 		setInterval(function() {
             if(enableRefreshData){
@@ -255,7 +261,7 @@ $token = $sinusbot->getWebStreamToken($inst);
 
 	function stoppedEventListener(){
 		updateWebStream();
-		console.log("Stopped event listener: Reloading stream.");
+		console.log("Stream stopped? Reloading.");
 	}
 	video.addEventListener("ended", stoppedEventListener);
 	video.addEventListener("error", stoppedEventListener);
