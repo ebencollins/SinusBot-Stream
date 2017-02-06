@@ -107,8 +107,8 @@ $token = $sinusbot->getWebStreamToken($inst);
 		}
 
 		function changeWebStream(inst){
-            enableRefreshData = false;
-            getData(inst);
+			enableRefreshData = false;
+			getData(inst);
 			$.ajax({
 				url: 'util.php',
 				type: 'POST',
@@ -129,6 +129,11 @@ $token = $sinusbot->getWebStreamToken($inst);
                     $('#instance-dropdown').children().removeClass("active");
                     $('#instance-dropdown').children().eq(currentInstID).addClass("active");
                     enableRefreshData = true;
+                    date = new Date();
+                    date.setTime(date.getTime()+(30*24*60*60*1000));
+                    expires = "expires="+date.toUTCString();
+					console.log(expires);
+					document.cookie = "inst="+currentInstID+"; expires="+expires+"; path=/;";
            		}
         	});
 		}
