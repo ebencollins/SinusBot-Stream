@@ -15,16 +15,15 @@ if (isset($_POST['getData'])) {
       );
     if(getTrack() == null || getTrack() == ""){
       $finalURL = '<p>No song name given.</p>';
-  }else{
+    }else{
       $link = 'https://www.google.com/search?q=' . getTrack();
-		if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
+		
+        if(($urlFromMD = checkMetaDataForURL()) !== false){ //there is a URL
 		    if(($urlFull = resolveURL($urlFromMD)) !== false){ //it can be resolved to something
 		    	$link = $urlFull;
 		    }
 		}
-        if(returns404($link)){
-          $link = "";
-        }
+
 		if(getArtist() != "" && getArtist() != null) {
 			$finalURL = '<a class="songlink" href="'.$link.'" target="_blank">Song: '.getTrack().' from ' .getArtist(). '</a>';
 		} else {
@@ -36,38 +35,36 @@ if (isset($_POST['getData'])) {
     }
 	$returnData['songname'] = $finalURL;
 
-	$unknownimg = $defaultThumbnail;;
-	$finalURL = $unknownimg;
 
-	if($useCachedThumbnail && $finalURL == $unknownimg){
-		if(array_key_exists('thumbnail', $status['currentTrack'])){
-			$thumbnailURL = $sinusbotURL . "/cache/" . $status['currentTrack']['thumbnail'];
-			$finalURL = $thumbnailURL;
-		}
-	}
-	if($findThumbnailFromMetaData && $finalURL == $unknownimg){
-		if(($urlFromMD = checkMetaDataForURL()) !== false){ //metdata contains a link
-			if(($urlFull = resolveURL($urlFromMD)) !== false){ //it is a valid url and has been resolved to a full URL
-		        if(($ytID = getYoutubeID($urlFull)) !== false){ //it's a youtube link
-		        $finalURL = "https://i.ytimg.com/vi/". $ytID ."/sddefault.jpg";
-             if(returns404($finalURL)) {
+
+    $unknownimg = $defaultThumbnail;;
+    $finalURL = $unknownimg;
+
+    if($useCachedThumbnail && $finalURL == $unknownimg){
+    	if(array_key_exists('thumbnail', $status['currentTrack'])){
+    		$thumbnailURL = $sinusbotURL . "/cache/" . $status['currentTrack']['thumbnail'];
+    		$finalURL = $thumbnailURL;
+    	}
+    }
+    if(isset($urlFull) && $urlFull != ""){
+        if(($ytID = getYoutubeID($urlFull)) !== false){ //it's a youtube link
+            $finalURL = "https://i.ytimg.com/vi/". $ytID ."/sddefault.jpg";
+            if(returns404($finalURL)) {
                 $finalURL = "https://i.ytimg.com/vi/". $ytID ."/hqdefault.jpg";
             }
         }
     }
-}
-}
-if($searchForThumbnail && $finalURL == $unknownimg){
-	// implement at some point
-}
+    if($searchForThumbnail && $finalURL == $unknownimg){
+    	// implement at some point
+    }
 
-if(returns404($finalURL) || strlen($finalURL) > 1000){
-  $finalURL = $unknownimg;
-}
+    if(strlen($finalURL) > 1000){
+      $finalURL = $unknownimg;
+    }
 
-$returnData['img'] = $finalURL;
+    $returnData['img'] = $finalURL;
 
-echo (json_encode($returnData));
+    echo (json_encode($returnData));
 
 }
 elseif(isset($_POST['getWebStream'])){
@@ -83,22 +80,33 @@ elseif(isset($_POST['getWebStream'])){
     $returnArr['instanceID'] = array_search($_POST['getWebStream'], $instanceIDS);
     $returnArr['instanceName'] = $instanceNames[$returnArr['instanceID']];
     echo(json_encode($returnArr));
+}elseif(isset($_POST['status'])){
+    print_r($status);
 }
 
 
 // MARK: FUNCTIONS
 function getTrack(){
     global $status;
+    $defaultTrack = "Error: Could not get songname.";
+    $track = $defaultTrackname;
     try {
-        if(array_key_exists("title", $status['currentTrack']) && isset($status['currentTrack']['title'])){
-            $track = $status['currentTrack']['title'];
-        }else if(array_key_exists("filename", $status['currentTrack']) && isset($status['currentTrack']['filename'])){
-            $track = $status['currentTrack']['filename'];
-        }else{
-            $track = "";
+        if($track != $defaultTrack){
+            if(array_key_exists("title", $status['currentTrack']) && isset($status['currentTrack']['title'])){
+                $track = $status['currentTrack']['title'];
+            }else if(array_key_exists("filename", $status['currentTrack']) && isset($status['currentTrack']['filename'])){
+                $track = $status['currentTrack']['filename'];
+            }
+        }
+        if($track != $defaultTrack){
+            if(array_key_exists("type", $status['currentTrack']) && isset($status['currentTrack']['type']) && $status['currentTrack']['type'] == "url"){
+                if(array_key_exists("tempTitle", $status['currentTrack']) && isset($status['tempTitle']['title'])){
+                    $track = $status['currentTrack']['tempTitle'];
+                }
+            }
         }
     }catch(Exception $e){
-        $track = "Error in getTrack() in getSong.php";
+        return $track;
     }
     return $track;
 }
@@ -109,14 +117,22 @@ function getName(){
 
 function getArtist(){
     global $status;
+    $artist = "";
     try {
-        if(array_key_exists("artist", $status['currentTrack']) && isset($status['currentTrack']['artist'])){
-            $artist = $status['currentTrack']['artist'];
-        }else{
-            $artist = "";
+        if($artist = ""){
+            if(array_key_exists("artist", $status['currentTrack']) && isset($status['currentTrack']['artist'])){
+                $artist = $status['currentTrack']['artist'];
+            }
+        }
+        if($artist == ""){
+            if(array_key_exists("type", $status['currentTrack']) && isset($status['currentTrack']['type']) && $status['currentTrack']['type'] == "url"){
+                if(array_key_exists("tempArtist", $status['currentTrack']) && isset($status['currentTrack']['tempArtist'])){
+                    $artist = $status['currentTrack']['tempArtist'];
+                }
+            }
         }
     }catch(Exception $e){
-        $artist = "Error in getArtist() in getSong.php";
+        $artist = "";
     }
     return $artist;
 }
@@ -181,6 +197,7 @@ function returns404($url){
 function resolveURL($url){
     try{
         $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 1);
         curl_setopt($ch,CURLOPT_HEADER,true); // Get header information
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION,false);

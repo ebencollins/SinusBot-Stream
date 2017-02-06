@@ -81,6 +81,8 @@ $token = $sinusbot->getWebStreamToken($inst);
 		var currentInstName = "<?php echo isset($id)? " - " . $instanceNames[$id] : ""; ?>";
         currentInstID = 0; //
 		var siteTitle = "<?php echo $title; ?>";
+		var errorCount = 0;
+
 		function getData(inst){
 			$.ajax({
 				url: 'util.php',
@@ -100,7 +102,6 @@ $token = $sinusbot->getWebStreamToken($inst);
            		}
         	});
 		}
-
 		function updateWebStream(){
             changeWebStream(currentInst);
 		}
@@ -139,16 +140,26 @@ $token = $sinusbot->getWebStreamToken($inst);
 		});
 
 		window.addEventListener('error', function(e) {
-			console.log("there was a fucking error m8 (reloading player with new source):");
-		    console.log(e);
-		    updateWebStream();
+			if(errorCount < 5){
+				errorCount++;
+				console.log("there was a fucking error m8 (reloading player with new source):");
+			    console.log(e);
+			    updateWebStream();
+			}
 		}, true);
-	
+
+		setInterval(function() {
+            if(errorCount > 0){
+			    errorCount-=1;
+            }
+		}, 30000); 
+		
 		setInterval(function() {
             if(enableRefreshData){
 			    getData(currentInst);
             }
-		}, 3500); 
+		}, 4500); 
+
 	</script>
 	<title><?php echo $title; ?></title>
 </head>
