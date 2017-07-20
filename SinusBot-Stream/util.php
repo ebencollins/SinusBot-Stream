@@ -5,7 +5,6 @@ require_once("config.php");
 $sinusbot = new SinusBot($sinusbotURL);
 $sinusbot->login($user, $passwd);
 $status = $sinusbot->getStatus($instanceIDS[$defaultInstance]);
-
 // MARK: POST
 if (isset($_POST['getData'])) {
     $status = $sinusbot->getStatus($_POST['getData']);
@@ -82,6 +81,8 @@ elseif(isset($_POST['getWebStream'])){
     echo(json_encode($returnArr));
 }elseif(isset($_POST['status'])){
     print_r($status);
+}else{
+    return;
 }
 
 
@@ -119,7 +120,7 @@ function getArtist(){
     global $status;
     $artist = "";
     try {
-        if($artist = ""){
+        if($artist == ""){
             if(array_key_exists("artist", $status['currentTrack']) && isset($status['currentTrack']['artist'])){
                 $artist = $status['currentTrack']['artist'];
             }
