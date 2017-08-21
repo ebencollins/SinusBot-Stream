@@ -34,6 +34,11 @@ $sinusbot->login($user, $passwd);
 $sinusbot->selectInstance($inst);
 $token = $sinusbot->getWebStreamToken($inst);
 
+if(isset($_GET['raw']) && $_GET['raw'] == "true"){
+	header("Location: " . $sinusbot->getWebStream());
+	exit();
+}
+
 ?>
 
 <html>
