@@ -6,7 +6,7 @@ $enableSSL = false; //this should match the settting in your sinusbot config or 
 
 $user = "webstream"; //username to login to the web panel 
 $passwd = "r3m3mb3rm3"; //corresponding password
-$title = "SinusBot-Radio v1.1.5"; //title to display
+$title = "SinusBot-Radio v1.1.6"; //title to display
 $teamspeakJoinLink="ts3server://000.000.000.000?server_uid=yourserveruid"; //generate link in teamspeak by doing the following: Click tools on the menu bar, select invite buddy, select in my current server (or channel if you want), invitation ts3server link, paste the link here.
 
 $instanceIDS = array("UUID1", "UUID2");
