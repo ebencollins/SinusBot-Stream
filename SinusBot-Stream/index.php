@@ -62,7 +62,7 @@ if(isset($_GET['raw']) && $_GET['raw'] == "true"){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
+	<link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
 	<link href="https://vjs.zencdn.net/5.16.0/video-js.css" rel="stylesheet">
 	<link href="css/videojs-custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/icon-font.css">
